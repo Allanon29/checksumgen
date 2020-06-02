@@ -3,6 +3,9 @@ class ChecksumGenerator
         english_alphabet = ('a'..'z').to_a
         vowels = ['a','e','i','o','u']
 
+        original_word_count = checksum_text.split(' ').length
+        original_length = checksum_text.length
+
         removed_letters = checksum_text.split('').map {|l| l if english_alphabet.include?(l) || l == ' ' }.join('')
 
         ten_char_words = removed_letters.delete(' ').split('')
@@ -42,6 +45,14 @@ class ChecksumGenerator
             end
         end
 
-        return myarray.join('')
+        uppercase_vowels = myarray.select { |l| vowels.include?(l.downcase) && l === l.upcase }.length
+        consonant_count = myarray.select { |l| !vowels.include?(l.downcase) && l != ' ' }.length
+
+        checksum_to_return = original_word_count.to_s + "-" + number_of_new_words.to_s + "-" + uppercase_vowels.to_s + "-" + consonant_count.to_s + "-" + original_length.to_s
+
+        return checksum_to_return
+    end
+
+    def remove_unwanted_chars
     end
 end
