@@ -1,2 +1,8 @@
 <h1>Checksummer</h1>
 
+<%= form_tag('/generate-checksum', method: :post) do %>
+    <div><%= text_area_tag :checksum_text %></div>
+    <div><%= submit_tag 'Generate checksum' %></div>
+<% end %>
+
+<h2><%= params[:checksum] %></h2>
