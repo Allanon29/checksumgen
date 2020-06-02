@@ -1,6 +1,7 @@
 class ChecksumGenerator
     def self.generateChecksum(checksum_text)
         english_alphabet = ('a'..'z').to_a
+        vowels = ['a','e','i','o','u']
 
         removed_letters = checksum_text.split('').map {|l| l if english_alphabet.include?(l) || l == ' ' }.join('')
 
@@ -26,6 +27,21 @@ class ChecksumGenerator
 
         ten_word_array.map! { |w| w.capitalize }
 
-        return ten_word_array.join(' ')
+        splitted_ten_word_array = ten_word_array.join(' ').split('')
+        myarray = []
+        splitted_ten_word_array.each_with_index do |w,i|
+            elements_with_lower_index = splitted_ten_word_array[0...i].select { |e| vowels.include?(e.downcase) }
+            
+            
+            myarray.push(w) if !vowels.include?(w.downcase)
+            if splitted_ten_word_array[i-1] === ' ' && vowels.include?(w.downcase) || vowels.include?(w.downcase) && elements_with_lower_index.length > 0 && i > 1 && !vowels.include?(splitted_ten_word_array[i-1].downcase) && !vowels.include?(splitted_ten_word_array[i-2].downcase) && elements_with_lower_index[-1] === elements_with_lower_index[-1].upcase
+                print elements_with_lower_index[-1]
+                myarray.push(w.capitalize)
+            elsif vowels.include?(w.downcase)
+                i != 0 && splitted_ten_word_array[i-1] != ' ' ? myarray.push(w.downcase) : myarray.push(w)
+            end
+        end
+
+        return myarray.join('')
     end
 end
