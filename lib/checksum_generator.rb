@@ -24,6 +24,8 @@ class ChecksumGenerator
             end
         end
 
+        ten_word_array.map! { |w| w.capitalize }
+
         return ten_word_array.join(' ')
     end
 end
