@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   require 'checksum_generator'
 
   def index
-    
+    @checksum = params[:checksum]
   end
 
   def generate_checksum
