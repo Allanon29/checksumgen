@@ -4,10 +4,10 @@
 
         <%= form_tag('/generate-checksum', method: :post) do %>
             <div><%= text_area_tag :checksum_text %></div>
-            <div><%= submit_tag 'Generate checksum' %></div>
+            <div><%= submit_tag(@checksum ? 'Generate new checksum' : 'Generate checksum') %></div>
         <% end %>
-        <% if params[:checksum] %>
-            <h2><%= params[:checksum] %></h2>
+        <% if @checksum %>
+            <h2><%= @checksum %></h2>
         <% end %>
     </div>
 </div>
